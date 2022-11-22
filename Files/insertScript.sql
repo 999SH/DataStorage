@@ -31,6 +31,7 @@ VALUES
 
 
 INSERT INTO student (id,person_id)
+VALUES
   ('21111','11111'),
   ('21112','11112'),
   ('21113','11113'),
@@ -41,11 +42,13 @@ INSERT INTO student (id,person_id)
   ('21118','11118');
 
 INSERT INTO sibling (person_id , student_id)
+VALUES
   ('11111','21112'),
   ('11112','21111'),
 
 
 INSERT INTO guardian (person_id , student_id)
+VALUES
   ('68249','21111'),
   ('68249','21112'),
   ('68249','21113'),

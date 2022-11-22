@@ -21,7 +21,7 @@ VALUES
 
 
 
-INSERT INTO instrument (id,instrument_type)
+INSERT INTO instrument(id,instrument_type)
 VALUES
   ('17048','keyboard'),
   ('17365','violin'),
@@ -30,7 +30,7 @@ VALUES
   ('17348','clarinet');
 
 
-INSERT INTO student (id)
+INSERT INTO student /*(id, person_id)*/
 VALUES
   ('21111','11111'),
   ('21112','11112'),

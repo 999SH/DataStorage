@@ -23,11 +23,11 @@ VALUES
 
 INSERT INTO instrument (id,instrument_type)
 VALUES
-  ('9204825812','keyboard'),
-  ('5636516585','violin'),
-  ('1183724387','trumpet'),
-  ('1361621115','drums'),
-  ('9634857723','clarinet');
+  ('92048','keyboard'),
+  ('56365','violin'),
+  ('11837','trumpet'),
+  ('13616','drums'),
+  ('96348','clarinet');
 
 
 INSERT INTO student (id,person_id)

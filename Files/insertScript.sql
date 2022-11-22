@@ -1,7 +1,7 @@
 
 
 
-INSERT INTO person (id,first_name,last_name,phone_nr,email)
+INSERT INTO person(id,first_name,last_name,phone_nr,email)
 VALUES
   ('11111','Isabelle','Dejesus','08 52 11 40 72','nunc@student.net'),
   ('11112','Iola','Woods','09 19 58 50 55','rhoncus.donec.est@student.edu'),
@@ -23,14 +23,14 @@ VALUES
 
 INSERT INTO instrument (id,instrument_type)
 VALUES
-  ('92048','keyboard'),
-  ('56365','violin'),
-  ('11837','trumpet'),
-  ('13616','drums'),
-  ('96348','clarinet');
+  ('17048','keyboard'),
+  ('17365','violin'),
+  ('17837','trumpet'),
+  ('17616','drums'),
+  ('17348','clarinet');
 
 
-INSERT INTO student (id,person_id)
+INSERT INTO student (id)
 VALUES
   ('21111','11111'),
   ('21112','11112'),
@@ -41,13 +41,13 @@ VALUES
   ('21117','11117'),
   ('21118','11118');
 
-INSERT INTO sibling (person_id , student_id)
+INSERT INTO sibling
 VALUES
   ('11111','21112'),
   ('11112','21111'),
 
 
-INSERT INTO guardian (person_id , student_id)
+INSERT INTO guardian
 VALUES
   ('68249','21111'),
   ('68249','21112'),

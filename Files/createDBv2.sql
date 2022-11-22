@@ -27,7 +27,8 @@ ALTER TABLE genre ADD CONSTRAINT PK_genre PRIMARY KEY (id);
 
 CREATE TABLE instructor (
  id INT NOT NULL,
- can_teach_ensemble BOOLEAN
+ can_teach_ensemble BOOLEAN,
+ person_id INT NOT NULL
 );
 
 ALTER TABLE instructor ADD CONSTRAINT PK_instructor PRIMARY KEY (id);
@@ -42,11 +43,11 @@ ALTER TABLE instrument ADD CONSTRAINT PK_instrument PRIMARY KEY (id);
 
 
 CREATE TABLE instrument_taught (
- instructor_id INT NOT NULL,
- instrument_id INT NOT NULL
+ instrument_id INT NOT NULL,
+ id INT NOT NULL
 );
 
-ALTER TABLE instrument_taught ADD CONSTRAINT PK_instrument_taught PRIMARY KEY (instructor_id,instrument_id);
+ALTER TABLE instrument_taught ADD CONSTRAINT PK_instrument_taught PRIMARY KEY (instrument_id,id);
 
 
 CREATE TABLE student (
@@ -114,7 +115,7 @@ ALTER TABLE individual_lesson ADD CONSTRAINT PK_individual_lesson PRIMARY KEY (l
 CREATE TABLE scheduled_group_lesson (
  lesson_id INT NOT NULL,
  student_id INT NOT NULL,
- instructor_id INT NOT NULL
+ id INT
 );
 
 ALTER TABLE scheduled_group_lesson ADD CONSTRAINT PK_scheduled_group_lesson PRIMARY KEY (lesson_id);
@@ -123,7 +124,7 @@ ALTER TABLE scheduled_group_lesson ADD CONSTRAINT PK_scheduled_group_lesson PRIM
 CREATE TABLE scheduled_ensemble (
  ensemble_id VARCHAR(50) NOT NULL,
  student_id INT NOT NULL,
- instructor_id INT NOT NULL
+ id INT
 );
 
 ALTER TABLE scheduled_ensemble ADD CONSTRAINT PK_scheduled_ensemble PRIMARY KEY (ensemble_id);
@@ -132,7 +133,7 @@ ALTER TABLE scheduled_ensemble ADD CONSTRAINT PK_scheduled_ensemble PRIMARY KEY 
 CREATE TABLE application (
  person_id INT NOT NULL,
  instrument_id INT NOT NULL,
- instrument_level_id INT NOT NULL
+ skill_level_id INT NOT NULL
 );
 
 ALTER TABLE application ADD CONSTRAINT PK_application PRIMARY KEY (person_id,instrument_id);
@@ -177,14 +178,17 @@ ALTER TABLE student_skill_instrument ADD CONSTRAINT PK_student_skill_instrument 
 CREATE TABLE booked_individual_lesson (
  lesson_id INT NOT NULL,
  student_id INT NOT NULL,
- instructor_id INT NOT NULL
+ id INT
 );
 
 ALTER TABLE booked_individual_lesson ADD CONSTRAINT PK_booked_individual_lesson PRIMARY KEY (lesson_id);
 
 
-ALTER TABLE instrument_taught ADD CONSTRAINT FK_instrument_taught_0 FOREIGN KEY (instructor_id) REFERENCES instructor (id);
-ALTER TABLE instrument_taught ADD CONSTRAINT FK_instrument_taught_1 FOREIGN KEY (instrument_id) REFERENCES instrument (id);
+ALTER TABLE instructor ADD CONSTRAINT FK_instructor_0 FOREIGN KEY (person_id) REFERENCES person (id);
+
+
+ALTER TABLE instrument_taught ADD CONSTRAINT FK_instrument_taught_0 FOREIGN KEY (instrument_id) REFERENCES instrument (id);
+ALTER TABLE instrument_taught ADD CONSTRAINT FK_instrument_taught_1 FOREIGN KEY (id) REFERENCES instructor (id);
 
 
 ALTER TABLE student ADD CONSTRAINT FK_student_0 FOREIGN KEY (person_id) REFERENCES person (id);
@@ -209,12 +213,12 @@ ALTER TABLE individual_lesson ADD CONSTRAINT FK_individual_lesson_0 FOREIGN KEY 
 
 ALTER TABLE scheduled_group_lesson ADD CONSTRAINT FK_scheduled_group_lesson_0 FOREIGN KEY (lesson_id) REFERENCES group_lesson (lesson_id);
 ALTER TABLE scheduled_group_lesson ADD CONSTRAINT FK_scheduled_group_lesson_1 FOREIGN KEY (student_id) REFERENCES student (id);
-ALTER TABLE scheduled_group_lesson ADD CONSTRAINT FK_scheduled_group_lesson_2 FOREIGN KEY (instructor_id) REFERENCES instructor (id);
+ALTER TABLE scheduled_group_lesson ADD CONSTRAINT FK_scheduled_group_lesson_2 FOREIGN KEY (id) REFERENCES instructor (id);
 
 
 ALTER TABLE scheduled_ensemble ADD CONSTRAINT FK_scheduled_ensemble_0 FOREIGN KEY (ensemble_id) REFERENCES ensemble (ensemble_id);
 ALTER TABLE scheduled_ensemble ADD CONSTRAINT FK_scheduled_ensemble_1 FOREIGN KEY (student_id) REFERENCES student (id);
-ALTER TABLE scheduled_ensemble ADD CONSTRAINT FK_scheduled_ensemble_2 FOREIGN KEY (instructor_id) REFERENCES instructor (id);
+ALTER TABLE scheduled_ensemble ADD CONSTRAINT FK_scheduled_ensemble_2 FOREIGN KEY (id) REFERENCES instructor (id);
 
 
 ALTER TABLE application ADD CONSTRAINT FK_application_0 FOREIGN KEY (person_id) REFERENCES person (id);
@@ -241,6 +245,6 @@ ALTER TABLE student_skill_instrument ADD CONSTRAINT FK_student_skill_instrument_
 
 ALTER TABLE booked_individual_lesson ADD CONSTRAINT FK_booked_individual_lesson_0 FOREIGN KEY (lesson_id) REFERENCES individual_lesson (lesson_id);
 ALTER TABLE booked_individual_lesson ADD CONSTRAINT FK_booked_individual_lesson_1 FOREIGN KEY (student_id) REFERENCES student (id);
-ALTER TABLE booked_individual_lesson ADD CONSTRAINT FK_booked_individual_lesson_2 FOREIGN KEY (instructor_id) REFERENCES instructor (id);
+ALTER TABLE booked_individual_lesson ADD CONSTRAINT FK_booked_individual_lesson_2 FOREIGN KEY (id) REFERENCES instructor (id);
 
 

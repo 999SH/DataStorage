@@ -223,9 +223,9 @@ VALUES
 
 INSERT INTO scheduled_group_lesson(lesson_id,student_id,instructor_id) 
 VALUES
-('21001','21118','99004');
+('20001','21118','99004');
 
 INSERT INTO booked_individual_lesson(lesson_id,student_id,instructor_id) 
 VALUES
-('20001','21117','99006');
+('21001','21117','99006');
 

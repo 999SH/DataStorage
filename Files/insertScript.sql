@@ -54,17 +54,8 @@ VALUES
   ('99004','Grirk','Grickman','01 77 26 72 41','leolecturer.morbi.neque@lecturer.net'),
   ('99005','Grhadwick','Grguilar','01 44 58 20 35','curlecturersus.purus@lecturer.org'),
   ('99006','Grrent','Greblanc','01 48 80 33 30','pelllecturerentesque.sed@lecturer.net'),
-  ('98007','Koopa','Troopa','09 00 04 20 30',' onlystaff@staff.net');
-
-
-INSERT INTO instrument(id,instrument_type)
-VALUES
-  ('17001','keyboard'),
-  ('17002','violin'),
-  ('17003','trumpet'),
-  ('17004','drums'),
-  ('17005','clarinet');
-
+  ('98007','Koopa','Troopa','09 00 04 20 30',' onlystaff@staff.net'),
+  ('11511','applicant','deapplicanté','11 11 11 12 00', 'applicant@applicanteer.net');
 
 INSERT INTO student (id, person_id)
 VALUES
@@ -123,11 +114,38 @@ VALUES
   ('500021','21131'),
   ('500022','21132');
 
+
+INSERT INTO instructor (id, can_teach_ensemble, person_id)
+VALUES
+('91901','FALSE','99001'),
+('91902','TRUE','99002'),
+('91903','FALSE','99003'),
+('91904','FALSE','99004'),
+('91905','TRUE','99005'),
+('91906','TRUE','99006');
+
+INSERT INTO staff (id,person_id)
+VALUES 
+('91807','98007');
+
 INSERT INTO skill_level (id, skill_level)
 VALUES
  ('18001','Beginner'),
  ('18002','Intermediate'),
  ('18003','Advanced');
+
+
+INSERT INTO instrument(id,instrument_type)
+VALUES
+  ('17001','keyboard'),
+  ('17002','violin'),
+  ('17003','trumpet'),
+  ('17004','drums'),
+  ('17005','clarinet'); 
+
+INSERT INTO application (person_id,instrument_id,skill_level_id)
+VALUES 
+('11511','17002','18002');
 
 INSERT INTO student_skill_instrument (student_id,instrument_id,skill_level_id)
 VALUES
@@ -155,5 +173,59 @@ VALUES
   ('21132','17005','18003'),
   ('21133','17003','18002');
 
-  
+INSERT INTO instrument_rented (instrument_id, student_id, lease_period, instrument_price, instrument_brand)
+VALUES
+('17001','21111','01/01/2021-01/01/2022','100','Brand1'),
+('17002','21112','01/02/2021-01/02/2022','100','Brand2');
+
+INSERT INTO instrument_taught (instrument_id,instructor_id)
+VALUES
+('17001','919001'),
+('17002','919001'),
+('17003','919001'),
+('17001','919002'),
+('17003','919003'),
+('17003','919004'),
+('17004','919004'),
+('17004','919006'),
+('17005','919006');
+
+INSERT INTO genre (id, genre)
+VALUES
+('19001','Rock'),
+('19002','Jazz'),
+('19003','Grunge'),
+('19004','Hip-Hop'),
+('19005','RnB');
+
+INSERT INTO lesson (id, staff_id, timeframe,skill_level_id,instrument_id)
+VALUES
+('20001','91807','Monday 8:00-10:00','18001','17001'),
+('21001','91807','Monday 10:00-12:00','18002','17002');
+
+
+INSERT INTO group_lesson (lesson_id,schedule,min_students,max_students,price,price_discounted)
+VALUES
+('20001','Every monday 08:00-10:00','1','10','150','100');
+
+
+INSERT INTO individual_lesson (lesson_id,price,price_discounted)
+VALUES
+('21001','150','100');
+
+INSERT INTO ensemble (id, staff_id, min_students,max_students,price,price_discounted,schedule,genre_id)
+VALUES
+('22001','91807','3','6','200','150','Every thursday 08:00-10:00','19002');
+
+INSERT INTO scheduled_ensemble (ensemble_id,student_id,instructor_id)
+VALUES
+('22001','21119','99005');
+
+INSERT INTO scheduled_group_lesson(lesson_id,student_id,instructor_id) 
+VALUES
+('21001','21118','99004');
+
+INSERT INTO booked_individual_lesson(lesson_id,student_id,instructor_id) 
+VALUES
+('20001','21117','99006');
 

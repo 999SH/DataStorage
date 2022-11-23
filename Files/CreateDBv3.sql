@@ -70,7 +70,7 @@ CREATE TABLE lesson (
  id INT NOT NULL,
  staff_id INT,
  timeframe VARCHAR(50),
- skill_level VARCHAR(50),
+ skill_level_id INT NOT NULL,
  instrument_id INT NOT NULL
 );
 
@@ -198,6 +198,7 @@ ALTER TABLE staff ADD CONSTRAINT FK_staff_0 FOREIGN KEY (person_id) REFERENCES p
 
 
 ALTER TABLE lesson ADD CONSTRAINT FK_lesson_0 FOREIGN KEY (staff_id) REFERENCES staff (id);
+ALTER TABLE lesson ADD CONSTRAINT FK_lesson_1 FOREIGN KEY (skill_level_id) REFERENCES skill_level (id);
 ALTER TABLE lesson ADD CONSTRAINT FK_lesson_1 FOREIGN KEY (instrument_id) REFERENCES instrument (id);
 
 

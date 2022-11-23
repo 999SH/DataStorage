@@ -32,7 +32,7 @@ VALUES
   ('50004','Lee','David','08 84 34 85 95','lectus.pede.ultrices@parent.ca'),
   ('50005','Simon','Gray','03 93 78 86 61','purus.duis.elementum@parent.edu'),
   ('50006','Kelsey','Norton','02 11 34 79 42','est@parent.com'),
-  ('50007','Davis','Hopkins','04 84 81 20 17','fringilla.ornare@parent.edu')
+  ('50007','Davis','Hopkins','04 84 81 20 17','fringilla.ornare@parent.edu'),
   ('50008','Zenaida','Lang','07 65 56 65 75','ipsum.curabitur.consequat@parent.net'),
   ('50009','Nathaniel','Bartlett','08 42 33 87 80','quisque.ornare@parent.couk'),
   ('50010','Erasmus','Butler','07 22 44 13 85','placerat.cras.dictum@parent.net'),
@@ -95,7 +95,7 @@ VALUES
 INSERT INTO sibling (person_id, student_id)
 VALUES
   ('11111','21112'),
-  ('11112','21111'),
+  ('11112','21111');
 
 
 INSERT INTO guardian (person_id, student_id)

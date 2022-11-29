@@ -69,6 +69,7 @@ ALTER TABLE staff ADD CONSTRAINT PK_staff PRIMARY KEY (id);
 CREATE TABLE lesson (
  id INT NOT NULL,
  staff_id INT,
+ timeframe VARCHAR(50),
  skill_level_id INT NOT NULL,
  instrument_id INT NOT NULL,
  day VARCHAR(50),

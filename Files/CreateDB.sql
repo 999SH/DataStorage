@@ -69,9 +69,11 @@ ALTER TABLE staff ADD CONSTRAINT PK_staff PRIMARY KEY (id);
 CREATE TABLE lesson (
  id INT NOT NULL,
  staff_id INT,
- timeframe VARCHAR(50),
  skill_level_id INT NOT NULL,
- instrument_id INT NOT NULL
+ instrument_id INT NOT NULL,
+ day VARCHAR(50),
+ month VARCHAR(50),
+ year VARCHAR(50)
 );
 
 ALTER TABLE lesson ADD CONSTRAINT PK_lesson PRIMARY KEY (id);
@@ -85,7 +87,10 @@ CREATE TABLE ensemble (
  price VARCHAR(50),
  price_discounted VARCHAR(50),
  schedule VARCHAR(50),
- genre_id INT NOT NULL
+ genre_id INT NOT NULL,
+ day VARCHAR(50),
+ month VARCHAR(50),
+ year VARCHAR(50)
 );
 
 ALTER TABLE ensemble ADD CONSTRAINT PK_ensemble PRIMARY KEY (id);
@@ -199,7 +204,7 @@ ALTER TABLE staff ADD CONSTRAINT FK_staff_0 FOREIGN KEY (person_id) REFERENCES p
 
 ALTER TABLE lesson ADD CONSTRAINT FK_lesson_0 FOREIGN KEY (staff_id) REFERENCES staff (id);
 ALTER TABLE lesson ADD CONSTRAINT FK_lesson_1 FOREIGN KEY (skill_level_id) REFERENCES skill_level (id);
-ALTER TABLE lesson ADD CONSTRAINT FK_lesson_1 FOREIGN KEY (instrument_id) REFERENCES instrument (id);
+ALTER TABLE lesson ADD CONSTRAINT FK_lesson_2 FOREIGN KEY (instrument_id) REFERENCES instrument (id);
 
 
 ALTER TABLE ensemble ADD CONSTRAINT FK_ensemble_0 FOREIGN KEY (staff_id) REFERENCES staff (id);

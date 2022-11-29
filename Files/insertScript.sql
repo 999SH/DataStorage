@@ -217,9 +217,9 @@ VALUES
 
 INSERT INTO group_lesson (lesson_id,schedule,min_students,max_students,price,price_discounted)
 VALUES
-('20001','Every monday 08:00-10:00','1','10','150','100'),
-('20002','Every monday 08:00-10:00','1','10','150','100'),
-('20003','Every monday 08:00-10:00','1','10','150','100');
+('20001','Monday','1','10','150','100'),
+('20002','Monday','1','10','150','100'),
+('20003','Monday','1','10','150','100');
 
 
 INSERT INTO individual_lesson (lesson_id,price,price_discounted)
@@ -230,12 +230,24 @@ VALUES
 
 INSERT INTO ensemble (id, staff_id, min_students,max_students,price,price_discounted,schedule,genre_id,day,month,year)
 VALUES
-('22001','91807','3','6','200','150','Every thursday 08:00-10:00','19002','02','01','2022'),
-('22002','91807','3','6','200','150','Every thursday 08:00-10:00','19002','09','01','2022');
+('22001','91807','3','6','200','150','Thursday','19002','02','01','2022'),
+('22002','91807','3','6','200','150','Thursday','19002','09','01','2022'),
+('22003','91807','2','8','100','50','Wednesday','19001','03','01','2022');
+
 
 INSERT INTO scheduled_ensemble (ensemble_id,student_id,instructor_id)
 VALUES
-('22001','21119','91905');
+('22001','21119','91905'),
+('22001','21118','91905'),
+('22001','21117','91905'),
+('22001','21116','91905'),
+('22002','21111','91905'),
+('22002','21112','91905'),
+('22002','21113','91905'),
+('22002','21114','91906'),
+('22002','21115','91906'),
+('22002','21116','91906');
+
 
 INSERT INTO scheduled_group_lesson(lesson_id,student_id,instructor_id) 
 VALUES

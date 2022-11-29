@@ -81,7 +81,7 @@ ALTER TABLE lesson ADD CONSTRAINT PK_lesson PRIMARY KEY (id);
 
 
 CREATE TABLE ensemble (
- id VARCHAR(50) NOT NULL,
+ id INT NOT NULL,
  staff_id INT,
  min_students VARCHAR(50),
  max_students VARCHAR(50),
@@ -128,7 +128,7 @@ ALTER TABLE scheduled_group_lesson ADD CONSTRAINT PK_scheduled_group_lesson PRIM
 
 
 CREATE TABLE scheduled_ensemble (
- ensemble_id VARCHAR(50) NOT NULL,
+ ensemble_id INT NOT NULL,
  student_id INT NOT NULL,
  instructor_id INT NOT NULL
 );

@@ -1,0 +1,1 @@
+SELECT id FROM TAG_TABLE WHERE 'aaaaaaaa' ~ tag_name

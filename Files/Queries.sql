@@ -22,6 +22,8 @@ FROM(
  07    |              1
  08    |              1 */
 
+
+
 /*list group and individual lessons*/
 
 SELECT month, COUNT(gid) AS group_lessons, COUNT(iid) AS individual_lessons
@@ -46,6 +48,7 @@ ORDER BY month;
  08    |             1 |                  0 */
 
 
+
 /* Lists group, individual and ensembles, broken due to ensembles using own months */ 
 
 SELECT month, COUNT(gid) AS group_lessons, COUNT(iid) AS individual_lessons, COUNT (eid) AS ensembles
@@ -53,13 +56,16 @@ FROM
 (
 SELECT group_lesson.lesson_id AS gid, individual_lesson.lesson_id AS iid, ensemble.id AS eid
 FROM individual_lesson
-FULL OUTER JOIN group_lesson
-ON individual_lesson.lesson_id = group_lesson.lesson_id
-FULL OUTER JOIN ensemble
-ON ensemble.id = individual_lesson.lesson_id
-) as f
 JOIN lesson
 ON lesson.id = iid 
+FULL OUTER JOIN group_lesson
+ON individual_lesson.lesson_id = group_lesson.lesson_id
+JOIN lesson
+ON lesson.id = gid 
+FULL OUTER JOIN ensemble
+ON ensemble.month = individual_lesson.month
+) as f
+
 OR lesson.id = gid
 GROUP BY month
 ORDER BY month;
@@ -92,6 +98,7 @@ FROM(
  01    |              3 */
  
 
+
  /* See how many siblings each student has*/
 
 SELECT DISTINCT student.id AS student , COUNT(sibling.student_id) AS siblings
@@ -108,12 +115,13 @@ ORDER BY student;
    21120 |        2
    21121 |        2 */
 
+
+
 /* See which the siblings actually are */
 
 SELECT student.id AS student , sibling.person_id AS sibling
 FROM student, sibling
 WHERE student.person_id = sibling.person_id
-
 ORDER BY student;
 
 
@@ -129,7 +137,9 @@ ORDER BY student;
    21121 |   11121 */
 
 
-/* Show amount of lessons per instructor */
+
+/* Show amount of lessons per instructor, inner query gives all booked lessons once */
+
 SELECT DISTINCT id AS instructor, 
 COUNT(lesson_id)
 OVER (PARTITION BY id) AS amount_of_lessons, month

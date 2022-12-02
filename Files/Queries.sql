@@ -161,15 +161,21 @@ instructor | amount_of_lessons | month
 
 
 
-
+SELECT id AS lesson_id, 
+CASE 
+WHEN places_left > 2 THEN 'Many seats left'
+WHEN places_left > 0 THEN '1-2 seats left'
+ELSE 'No seats left'
+END AS places_left, genre, schedule, day , month
+FROM (
 SELECT DISTINCT id, 
-(max-(COUNT(students_attending) OVER (PARTITION BY id))) AS places_left,
+(max-(COUNT(student_attending) OVER (PARTITION BY id))) AS places_left,
 max, genre, schedule,
-COUNT(students_attending) OVER (PARTITION BY id) AS students_attending,
+COUNT(student_attending) OVER (PARTITION BY id) AS students_attending,
 day, month  
 FROM 
 (
-SELECT ensemble.id, student_id AS students_attending, CAST(ensemble.max_students AS INT) AS max, 
+SELECT ensemble.id, student_id AS student_attending, CAST(ensemble.max_students AS INT) AS max, 
 ensemble.day, ensemble.month, genre, schedule
 FROM ensemble 
 FULL OUTER JOIN  scheduled_ensemble
@@ -181,13 +187,29 @@ AND  date_part('day',CURRENT_DATE+6)
 AND CAST(month AS INT) = date_part('month',CURRENT_DATE)
 AND CAST(YEAR AS INT)  = date_part('year',CURRENT_DATE)
 ORDER BY genre_id, day
-) as f;
+) as f
+) as g;
+
 
 /*
-  id   | places_left | max | genre | schedule | students_attending | day | month 
--------+-------------+-----+-------+----------+--------------------+-----+-------
- 22006 |           2 |   4 | RnB   | Friday   |                  2 | 02  | 12
- 22007 |           3 |   4 | RnB   | Monday   |                  1 | 05  | 12
+Final result 
+ lesson_id |   places_left   |  genre  | schedule | day | month
+-----------+-----------------+---------+----------+-----+-------
+     22006 | 1-2 seats left  | RnB     | Friday   | 02  | 12
+     22007 | Many seats left | RnB     | Monday   | 05  | 12
+     22008 | Many seats left | Grunge  | Tuesday  | 06  | 12
+     22009 | Many seats left | Hip-Hop | Tuesday  | 06  | 12
+
+Middle subquery
+
+  id   | places_left | max |  genre  | schedule | students_attending | day | month
+-------+-------------+-----+---------+----------+--------------------+-----+-------
+ 22006 |           2 |   4 | RnB     | Friday   |                  2 | 02  | 12
+ 22007 |           3 |   4 | RnB     | Monday   |                  1 | 05  | 12
+ 22008 |           5 |   5 | Grunge  | Tuesday  |                  0 | 06  | 12
+ 22009 |           3 |   3 | Hip-Hop | Tuesday  |                  0 | 06  | 12
+
+
 */
 
 
